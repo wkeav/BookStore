@@ -13,7 +13,7 @@ import lombok.Data;
 @Table(name="books")
 public class Book {
     @Id 
-    @GeneratedValue(strategy=GenerationType.IDENTITY )
+    @GeneratedValue(strategy=GenerationType.IDENTITY ) //auto generate ID values 
     private Long id; 
 
     @Column(name="book")
@@ -22,7 +22,7 @@ public class Book {
     @Column(name="author")
     private String author;
 
-    @Column(name="isbn", unique=true)
+    @Column(name="isbn", unique=true) //isbn has to be unique for each book
     private String isbn;
 
     @Column(name="price")
