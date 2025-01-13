@@ -20,6 +20,7 @@ function Navbar({ setCurrentPage, currentPage}){
                     </button>
                     <button
                         className={`nav-link ${currentPage === 'login' ? 'active' : ''}`}
+                        onClick={() => setCurrentPage('login')}
                     >
                         Login 
                     </button>
