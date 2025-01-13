@@ -1,7 +1,8 @@
 package com.bookStore.E_commerce.bookStore.service;
 
 import com.bookStore.E_commerce.bookStore.entities.Book;
-import com.bookStore.E_commerce.bookStore.repositories.BookRepository;
+import com.bookStore.E_commerce.bookStore.repository.BookRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
