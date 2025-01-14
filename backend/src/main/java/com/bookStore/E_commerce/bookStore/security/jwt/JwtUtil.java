@@ -33,5 +33,9 @@ public class JwtUtil {
         return createToken(claims,userDetails.getUsername());
     }
 
-    
+    public String createToken(){
+
+    }
+
+
 }

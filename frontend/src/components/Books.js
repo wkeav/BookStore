@@ -10,7 +10,7 @@ function Books(){
     //return each book with a "card" displaying title, author, price and an add to cart button
     return (
         <div>
-            <h2>Available Books</h2>
+            <h2 className="book-page">Available Books</h2>
             <div className="book-grid">
             {sampleBooks.map((book)=>
             (<div key={book.id} className="card">

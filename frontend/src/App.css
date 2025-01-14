@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 .App {
   text-align: center;
 }
@@ -19,6 +21,7 @@
 .navbar-brand {
   font-size: 2.5rem;
   font-weight: bold;
+  font-family: "Pacifico", serif;
 }
 
 .navbar-links {
@@ -32,6 +35,7 @@
   color: white;
   cursor: pointer;
   font-size: 1.7rem;
+  font-family: "Pacifico", serif;
   padding: 0.5rem 1rem;
 }
 
@@ -67,6 +71,9 @@
 
 .card:hover {
   transform: translateY(-5px);
+}
+.book-page{
+  font-family: "Pacifico", serif;
 }
 
 .book-title {
