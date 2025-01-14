@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
-/*
+/* TODO: go over this and understand it 
  * 
  */
 @Component //make this class a spring managed bean
@@ -33,8 +34,15 @@ public class JwtUtil {
         return createToken(claims,userDetails.getUsername());
     }
 
-    public String createToken(){
-
+    //payroad part 
+    public String createToken(String subject, Map<String,Object> claims){
+        return Jwts.builder() //the entry point for constructing a JWT
+            .setClaims(claims)
+            .setSubject(subject)
+            .setIssuedAt()
+            .setExpiration()
+            .signWith(getSigningKey())
+            .compact();
     }
 
 
