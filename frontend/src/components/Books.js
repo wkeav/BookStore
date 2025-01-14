@@ -2,9 +2,9 @@ import React from 'react';
 
 function Books(){
     const sampleBooks =[
-        {id: 1, title: 'Sample Book1', author: 'Author1', price: 29.99},
-        {id: 2, title: 'Sample Book 2', author: 'Author 2', price: 19.990},
-        {id: 3, title: 'Sample Book 3', author: 'Author 3', price: 24.99}
+        {id: 1, title: 'Book 1', author: 'Author1', price: 29.99},
+        {id: 2, title: 'Book 2', author: 'Author 2', price: 19.99},
+        {id: 3, title: ' Book 3', author: 'Author 3', price: 24.99}
     ];
 
     //return each book with a "card" displaying title, author, price and an add to cart button
