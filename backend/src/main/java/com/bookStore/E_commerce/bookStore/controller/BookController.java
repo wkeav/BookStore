@@ -17,11 +17,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/books")
-@CrossOrigin(origins =  "http://localhost:3000") //for React frontend 
+@CrossOrigin(origins =  "http://localhost:3001") //for React frontend 
 public class BookController {
     
-    @Autowired
+    
     private BookService bookService;
+
+    @Autowired
+    public void setBookService(BookService bookService){
+        this.bookService = bookService; //spring will inject the dependencies here 
+    }
 
     @GetMapping
     public List<Book> getAllBooks(){

@@ -11,8 +11,13 @@ import java.util.List;
 @Service
 public class BookService {
     
-    @Autowired
+    
     private BookRepository bookRepository; 
+
+    @Autowired
+    public void setBookRepository ( BookRepository bookRepository){
+        this.bookRepository = bookRepository;
+    }
 
     //get all books from database 
     public List<Book> getAllBooks(){

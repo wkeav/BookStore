@@ -1,18 +1,26 @@
 package com.bookStore.E_commerce.bookStore.security.jwt;
 
 import java.security.Key;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import java.security.Key;
+
 
 /* TODO: go over this and understand it 
- * 
+ * The security guard part of JSON Web Token:
+ *  - creating the token (header,payload, signature)
+ *  - ensure its valid, verify the token 
+ *  - read information from the token 
  */
 @Component //make this class a spring managed bean
 public class JwtUtil {
@@ -22,28 +30,47 @@ public class JwtUtil {
     @Value("${jwt.expiration}")
     private Long expiration; //expire time in milliseconds 
 
-    //retrieving the secret key 
-    private Key getSigningKey(){
-        byte[] keyBytes = secret.getBytes(); //cryptographic signing operation , has to be bytes
-        return Keys.hmacShaKeyFor(keyBytes);
+    private Key getSigningKey() {
+        return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    //generate new JWT for user
+    //check to see if token is expire 
+    private boolean isTokenExpired(String token) {
+        Date expiration = Jwts.parserBuilder()
+        .setSigningKey(secret.getBytes())
+        .build()
+        .parseClaimsJws(token)
+        .getBody()
+        .getExpiration();
+        return expiration.before(new Date());
+    }
+
+    //generate token when user logs in
     public String generateToken(UserDetails userDetails){
-        Map<String,Object> claims = new HashMap<>();
-        return createToken(claims,userDetails.getUsername());
-    }
-
-    //payroad part 
-    public String createToken(String subject, Map<String,Object> claims){
-        return Jwts.builder() //the entry point for constructing a JWT
-            .setClaims(claims)
-            .setSubject(subject)
-            .setIssuedAt()
-            .setExpiration()
-            .signWith(getSigningKey())
+        return Jwts.builder()
+            .setSubject(userDetails.getUsername())      //store email in token
+            .setIssuedAt(new Date())                    // when token was created
+            .setExpiration(new Date(System.currentTimeMillis() + expiration))
+            .signWith(getSigningKey(),SignatureAlgorithm.HS256)
             .compact();
     }
 
+    public String getEmailFromToken(String token){
+        return Jwts.parserBuilder()                    //Step 1: Create a JWT parser
+            .setSigningKey(secret.getBytes())         //Step 2: Set the secret key used to sign the JWT
+            .build()
+            .parseClaimsJws(token)                     //Step 3: Parse and verify the JWT
+            .getBody()                                 //Step 4: Retrieve the body (claims) of the JWT
+            .getSubject();                             //Step 5: Get the 'subject' claim (email in this case)
+}
 
+    //check if token is valid
+    public Boolean validateToken(String token, UserDetails userDetails){
+        try{
+            String email = getEmailFromToken(token);
+            return email.equals(userDetails.getUsername()) && !isTokenExpired(token);   //valid if email is correct provided email and token isn't expired
+        } catch(Exception e){
+            return false;
+        }
+    }
 }
