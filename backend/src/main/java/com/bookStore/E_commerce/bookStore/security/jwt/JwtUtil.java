@@ -2,9 +2,6 @@ package com.bookStore.E_commerce.bookStore.security.jwt;
 
 import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +13,7 @@ import io.jsonwebtoken.security.Keys;
 import java.security.Key;
 
 
-/* TODO: go over this and understand it 
+/* 
  * The security guard part of JSON Web Token:
  *  - creating the token (header,payload, signature)
  *  - ensure its valid, verify the token 
@@ -59,13 +56,13 @@ public class JwtUtil {
         return Jwts.parserBuilder()                    //Step 1: Create a JWT parser
             .setSigningKey(secret.getBytes())         //Step 2: Set the secret key used to sign the JWT
             .build()
-            .parseClaimsJws(token)                     //Step 3: Parse and verify the JWT
-            .getBody()                                 //Step 4: Retrieve the body (claims) of the JWT
-            .getSubject();                             //Step 5: Get the 'subject' claim (email in this case)
+            .parseClaimsJws(token)                    //Step 3: Parse and verify the JWT
+            .getBody()                                //Step 4: Retrieve the body (claims) of the JWT
+            .getSubject();                            //Step 5: Get the 'subject' claim (email in this case)
 }
 
     //check if token is valid
-    public Boolean validateToken(String token, UserDetails userDetails){
+    public  Boolean validateToken(String token, UserDetails userDetails){
         try{
             String email = getEmailFromToken(token);
             return email.equals(userDetails.getUsername()) && !isTokenExpired(token);   //valid if email is correct provided email and token isn't expired
