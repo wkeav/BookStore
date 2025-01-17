@@ -16,18 +16,19 @@ public class Book {
     @GeneratedValue(strategy=GenerationType.IDENTITY ) //auto generate ID values 
     private Long id; 
 
-    @Column(name="book")
+    @Column(name="book",nullable=false)
     private String book;
 
-    @Column(name="author")
+    @Column(name="author",nullable=false)
     private String author;
 
-    @Column(name="isbn", unique=true) //isbn has to be unique for each book
+    @Column(name="isbn", unique=true,nullable=false) //isbn has to be unique for each book
     private String isbn;
 
-    @Column(name="price")
+    @Column(name="price", nullable=false)
     private Double price;
 
+    @Column(length=1000)
     private String description;
 
 }
