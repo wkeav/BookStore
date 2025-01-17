@@ -1,11 +1,37 @@
-import React from 'react'; 
+import React, { useEffect, useState } from 'react'; 
+import BookService from '../services/BookService';
 
 function Books(){
-    const sampleBooks =[
-        {id: 1, title: 'Book 1', author: 'Author1', price: 29.99},
-        {id: 2, title: 'Book 2', author: 'Author 2', price: 19.99},
-        {id: 3, title: ' Book 3', author: 'Author 3', price: 24.99}
-    ];
+    const [books, setBooks] = useState([]);
+    const [loading, setLoading] = useEffect(true);
+    const [error, setError] = useState(null);
+
+
+    //function to fetch all books from backend 
+    useEffect(() => {
+        fetchBooks(); //Fetch data from an API 
+    },[]); //run once
+
+    const fetchBooks = async () => {
+        try{
+            setLoading(true);
+            const data = await BookService.getAllBooks();
+            setBooks(data); 
+        } catch (error) {
+            setError('Failed to fetch books. Please try again later.');
+            console.error('Error:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading) {
+        return <div className="loading">Loading books...</div>;
+    }
+
+    if (error) {
+        return <div className="error">{error}</div>;
+    }
 
     //return each book with a "card" displaying title, author, price and an add to cart button
     return (

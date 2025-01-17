@@ -8,7 +8,7 @@ const API_URL = 'http://localhost:8080/api/books';
 const BookService =  {
     //fetch all books in JSON form
     getAllBooks: async () => {
-        const response = await fetch('API_URl');
+        const response = await fetch(API_URL);
         if(!response.ok){
             throw new Error('Failed to fetch all books');
         }
