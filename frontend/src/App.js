@@ -5,6 +5,7 @@ import Books from './components/Books';
 import Cart from './components/Cart';
 import Login from './components/Login';
 import './App.css';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
     const [currentPage,setCurrentPage] = useState('home');
@@ -25,14 +26,15 @@ function App() {
       }
     };
   
-  
   return (
+    <AuthProvider>
       <div className="App">
         <Navbar  currentPage={currentPage} setCurrentPage={setCurrentPage}/>
         <main className="main">
         {renderPage()}
         </main>
       </div>
+      </AuthProvider>
     );
 }
 export default App;

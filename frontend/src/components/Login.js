@@ -18,7 +18,7 @@ function Login(){
     };
     
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault(); //causes page to reload 
         //validate if both input are fill 
         if(!formData.email || !formData.password){
