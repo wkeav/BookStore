@@ -11,7 +11,7 @@ const AuthService = {
     //login method process using an async function 
     login: async (email,password) => {
         const response = await fetch(`${API_URL}/login`, {
-            Method: 'POST',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },

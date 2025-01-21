@@ -1,9 +1,8 @@
-import Books from "../components/Books";
 
 /*
 * Provides functions to interact with backend API for book data 
 */
-const API_URL = 'http://localhost:8080/api/books';
+const API_URL = 'http://localhost:3001/api/books';
 
 const BookService =  {
     //fetch all books in JSON form

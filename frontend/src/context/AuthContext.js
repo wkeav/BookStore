@@ -4,7 +4,7 @@ import React, {createContext, useState, useContext, useSyncExternalStore} from '
 */
 const AuthContext = createContext(null);
 
-export const AuthProvider = ({ props }) => {
+export const AuthProvider = ({ children }) => {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false); // dynamic user authentication 
     const [user, setUser] = useState(null); //user information 
@@ -26,7 +26,7 @@ export const AuthProvider = ({ props }) => {
         <AuthContext.Provider 
             value={{isAuthenticated, user, login, logout}}
         >
-            {props}
+            {children}
         </AuthContext.Provider>
     );
 };

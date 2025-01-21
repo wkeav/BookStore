@@ -16,8 +16,8 @@ public class Book {
     @GeneratedValue(strategy=GenerationType.IDENTITY ) //auto generate ID values 
     private Long id; 
 
-    @Column(name="book",nullable=false)
-    private String book;
+    @Column(name="title",nullable=false)
+    private String title;
 
     @Column(name="author",nullable=false)
     private String author;
